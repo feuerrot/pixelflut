@@ -22,7 +22,7 @@ log = logging.getLogger('pixelflut')
 async = spawn
 
 class Client(object):
-    pps = 1000
+    pps = 10000
     
     def __init__(self, canvas):
         self.canvas = canvas
@@ -104,11 +104,11 @@ class Canvas(object):
             ip, port = addr
 
             client = self.clients.get(ip)
-            if client:
-                client.disconnect()
-                client.task.kill()
-            else:
-                client = self.clients[ip] = Client(self)
+            #if client:
+            #    client.disconnect()
+            #    client.task.kill()
+            #else:
+            client = self.clients[ip] = Client(self)
 
             client.task = spawn(client.serve, sock)
 
